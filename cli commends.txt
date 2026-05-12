@@ -1,0 +1,7 @@
+# Enter into directory
+>cd asia-70
+
+# Login MySQL
+>MySQL -u root -p
+
+
