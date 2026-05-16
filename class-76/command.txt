@@ -1,0 +1,31 @@
+create table if not exists users(
+id int(10) unsigned primary key auto_increment,
+name varchar(100),
+email varchar(100) not null,
+password varchar(255)
+);
+
+create table if not exists results(
+id int(10) unsigned primary key auto_increment,
+student_id int,
+score float default 0,
+exam_type varchar(100)
+);
+
+CRUD- Create, Read, Update, Delete
+
+insert into students (name, address, email, is_inactive) 
+values ('a', 'A', 'a@example.com', 1); 
+
+insert into students (name, address, email, is_inactive) 
+values ('b', 'B', 'b@example.com', 0); 
+
+insert into students (name, address, email, is_inactive) 
+values ('c', 'C', 'c@example.com', 0); 
+
+
+
+
+
+
+
