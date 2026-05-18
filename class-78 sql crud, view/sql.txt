@@ -1,0 +1,81 @@
+CRUD- Create, Read, Update, Delete
+
+insert into students(name, is_inactive, email) 
+values("Arif", 0, "arif@example.com");
+
+select id, name from students
+where is_inactive=0
+order by id desc;
+
+update students 
+set phone="01912345678", address="Khulna"
+where id=9;
+
+delete from students where id=10;
+
+alter table students
+add column phone varchar(20)
+after email;
+
+ALTER TABLE students
+CHANGE name full_name VARCHAR(100);
+
+ALTER TABLE students
+DROP COLUMN phone;
+
++------------+------------------+------+-----+---------+----------------+
+| Field      | Type             | Null | Key | Default | Extra          |
++------------+------------------+------+-----+---------+----------------+
+| id         | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| student_id | int(11)          | YES  |     | NULL    |                |
+| score      | float            | YES  |     | 0       |                |
+| exam_type  | varchar(100)     | YES  |     | NULL    |                |
++------------+------------------+------+-----+---------+----------------+
+
+create table if not exists results(
+id int unsigned auto_increment primary key,
+student_id int,
+score float default 0,
+exam_type varchar(100)
+);
+
+insert into results(student_id,score,exam_type)
+values(1,90,"Mid-1");
+insert into results(student_id,score,exam_type)
+values(2,80,"Mid-1");
+insert into results(student_id,score,exam_type)
+values(4,35,"Mid-1");
+insert into results(student_id,score,exam_type)
+values(6,20,"Mid-1");
+insert into results(student_id,score,exam_type)
+values(9,88,"Mid-2");
+insert into results(student_id,score,exam_type)
+values(12,33,"Mid-2");
+insert into results(student_id,score,exam_type)
+values(1,88,"Final");
+
+
+select r.student_id, s.full_name name, r.score as marks, r.exam_type 
+from students s, results as r
+where r.student_id = s.id and r.exam_type = "Mid-1";
+
+
+create view view_student_results as
+select r.student_id, s.full_name name, r.score as marks, r.exam_type 
+from students s, results as r
+where r.student_id = s.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
