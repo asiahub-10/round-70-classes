@@ -65,17 +65,3 @@ select r.student_id, s.full_name name, r.score as marks, r.exam_type
 from students s, results as r
 where r.student_id = s.id;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
