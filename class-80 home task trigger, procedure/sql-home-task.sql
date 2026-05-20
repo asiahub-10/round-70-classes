@@ -44,3 +44,11 @@ select * from vw_active_products where price > 1000;
 SELECT * FROM vw_active_products WHERE category = 'Mobile' AND brand = 'Apple';
 
 SELECT * FROM vw_active_products WHERE category = 'Mobile' AND price <= 1500 AND price >= 500;
+
+drop trigger if exists remove_product;
+create trigger remove_product  
+after delete on brands 
+for each row 
+delete from products where brand_id = old.id;
+
+delete from brands where id = 2;
