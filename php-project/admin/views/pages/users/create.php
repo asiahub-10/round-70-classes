@@ -1,3 +1,29 @@
+<?php
+require_once 'models/user.class.php';
+
+if(isset($_POST['btn_submit'])){
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $role_id = $_POST['role_id'];
+  $pass = $_POST['pass'];
+  $conf_pass = $_POST['conf_pass'];
+  // $msg = $name . " " . $email . " " . $role_id . " " . $pass . " " . $conf_pass;
+  if($pass == $conf_pass){
+    $pass = password_hash($pass, PASSWORD_DEFAULT);
+    $user = new User(null, $name, $email, $role_id, $pass);
+    $res = $user->create();
+    if($res === true){
+      $msg = "User created successfully";
+      
+    }else{
+      $msg = $res;
+    }
+  }else{
+    $msg = "Password doesn't match";
+  }
+}
+?>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -21,6 +47,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
+            <h4><?= $msg ?? "" ?></h4>
             <div class="card card-primary">
               <!-- form start -->
               <form action="" method="POST">
@@ -52,7 +79,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="btn_submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
             </div>
