@@ -2,32 +2,32 @@
 require_once 'models/user.class.php';
 require_once 'models/role.class.php';
 
-$roles = Role::readAll();
-// echo '<pre>';
-// print_r($roles);
-// echo '</pre>';
-
 if(isset($_POST['btn_submit'])){
+  $id = $_POST['id'];
   $name = $_POST['name'];
   $email = $_POST['email'];
   $role_id = $_POST['role_id'];
-  $pass = $_POST['pass'];
-  $conf_pass = $_POST['conf_pass'];
-  // $msg = $name . " " . $email . " " . $role_id . " " . $pass . " " . $conf_pass;
-  if($pass == $conf_pass){
-    $pass = password_hash($pass, PASSWORD_DEFAULT);
-    $user = new User(null, $name, $email, $role_id, $pass);
-    $res = $user->create();
-    if($res === true){
-      $msg = "User created successfully";
-      
-    }else{
-      $msg = $res;
-    }
-  }else{
-    $msg = "Password doesn't match";
-  }
+  // echo $name . " " . $email . " " . $role_id;
+  $user = new User($id, $name, $email, $role_id);
+  $user->update();  
 }
+
+$roles = Role::readAll();
+if(isset($_GET['id'])){
+  $row = User::readById($_GET['id']);
+  // echo '<pre>';
+  // print_r($row);
+  // echo '</pre>';
+  // if(!$item){
+  //   $not_found = true;
+  // }
+}
+// else{
+//   echo "<script>window.location='users';</script>";
+//   exit;
+// }
+
+
 ?>
 
 <div class="content-wrapper">
@@ -36,7 +36,7 @@ if(isset($_POST['btn_submit'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Create User</h1>
+            <h1>Edit User</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -57,38 +57,37 @@ if(isset($_POST['btn_submit'])){
             <h4><?= $msg ?? "" ?></h4>
             <div class="card card-primary">
               <!-- form start -->
+              <?php if(isset($not_found)): ?>
+               <h5>Data not found.</h5>
+              <?php else: ?>
               <form action="" method="POST">
+                <input type="hidden" value="<?= $row['id']; ?>" name="id">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" name="name" placeholder="Enter name">
+                    <input type="text" class="form-control" name="name" placeholder="Enter name" value="<?= $row['name']; ?>">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="email" placeholder="Enter email">
+                    <input type="email" class="form-control" name="email" placeholder="Enter email" value="<?= $row['email']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Role</label>
                     <select class="form-control" name="role_id">
-                      <?php foreach($roles as $item) { ?>
-                      <option value="<?= $item['id']; ?>"><?= $item['name']; ?></option>
+                      <?php foreach($roles as $item) { 
+                      $selected = $item['id'] == $row['role_id'] ? 'selected' : '';
+                      ?>                      
+                      <option value="<?= $item['id']; ?>" <?= $selected; ?> ><?= $item['name']; ?></option>
                       <?php } ?>
                     </select>
                   </div>
-                  <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="pass" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" class="form-control" name="conf_pass" placeholder="Confirm Password">
-                  </div>                  
                 </div>
-                <!-- /.card-body -->
+                <!-- /.card-body --> 
                 <div class="card-footer">
-                  <button type="submit" name="btn_submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" name="btn_submit" class="btn btn-primary">Update</button>
                 </div>
               </form>
+              <?php endif; ?>
             </div>
             <!-- /.card -->
           </div>

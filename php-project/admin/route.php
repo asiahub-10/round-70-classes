@@ -14,6 +14,9 @@ if(isset($_GET['page'])){
     elseif($page == 'create-user'){
         include_once('views/pages/users/create.php');
     }
+    elseif($page == 'edit-user'){
+        include_once('views/pages/users/edit.php');
+    }
     else{
         include_once('views/pages/dashboard.php');
     }

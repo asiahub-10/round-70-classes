@@ -2,7 +2,6 @@
 include_once 'config/base.php';
 include_once 'config/db.php';
 ?>
-
 <?php include_once('views/layouts/head.php'); ?>
 <div class="wrapper">
 
