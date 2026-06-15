@@ -52,7 +52,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link">
+            <a href="products" class="nav-link">
               <i class="nav-icon fa-solid fa-box"></i>
               <p>
                 Products

@@ -17,6 +17,12 @@ if(isset($_GET['page'])){
     elseif($page == 'edit-user'){
         include_once('views/pages/users/edit.php');
     }
+    elseif($page == 'products'){
+        include_once('views/pages/products/manage.php');
+    }
+    elseif($page == 'create-product'){
+        include_once('views/pages/products/create.php');
+    }
     else{
         include_once('views/pages/dashboard.php');
     }
