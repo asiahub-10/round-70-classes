@@ -65,7 +65,11 @@ class Product
   static public function readAll()
   {
     global $db;
-    $sql = "SELECT id, name, email FROM users ORDER BY id DESC";
+    $sql = "SELECT p.id, p.name, p.price, p.quantity, b.name as brand, c.name as category, p.active, p.image 
+    FROM products p, brands b, categories c
+    WHERE p.brand_id = b.id AND p.category_id = c.id  
+    ORDER BY id DESC";
+
     $result = $db->query($sql);
     return $result->fetch_all(MYSQLI_ASSOC);
   }

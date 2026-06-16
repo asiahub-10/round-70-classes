@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2026 at 09:24 AM
+-- Generation Time: Jun 16, 2026 at 09:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -64,6 +64,91 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL DEFAULT 1,
+  `user_id` int(11) NOT NULL DEFAULT 1,
+  `order_placed_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `user_id`, `order_placed_at`) VALUES
+(1, 1, 1, '2026-06-16 06:53:00'),
+(2, 1, 1, '2026-06-16 06:53:29'),
+(3, 1, 1, '2026-06-16 07:07:59'),
+(4, 1, 1, '2026-06-16 07:09:27'),
+(5, 1, 1, '2026-06-16 07:09:56'),
+(6, 1, 1, '2026-06-16 07:10:29'),
+(7, 1, 1, '2026-06-16 07:10:45'),
+(8, 1, 1, '2026-06-16 07:11:59'),
+(9, 1, 1, '2026-06-16 07:12:27'),
+(10, 1, 1, '2026-06-16 07:13:46'),
+(11, 1, 1, '2026-06-16 07:14:24'),
+(12, 1, 1, '2026-06-16 07:14:33'),
+(13, 1, 1, '2026-06-16 07:15:37'),
+(14, 1, 1, '2026-06-16 07:15:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `qty`, `price`) VALUES
+(1, 1, 5, 4, 1300),
+(2, 1, 6, 2, 1500),
+(3, 1, 7, 1, 2000),
+(4, 2, 8, 1, 1100),
+(5, 2, 4, 1, 1200),
+(6, 3, 8, 1, 1100),
+(7, 3, 4, 1, 1200),
+(8, 4, 8, 1, 1100),
+(9, 4, 4, 1, 1200),
+(10, 5, 8, 1, 1100),
+(11, 5, 4, 1, 1200),
+(12, 6, 8, 1, 1100),
+(13, 6, 4, 1, 1200),
+(14, 7, 8, 1, 1100),
+(15, 7, 4, 1, 1200),
+(16, 8, 8, 1, 1100),
+(17, 8, 4, 1, 1200),
+(18, 9, 8, 1, 1100),
+(19, 9, 4, 1, 1200),
+(20, 10, 8, 2, 1100),
+(21, 10, 4, 1, 1200),
+(22, 10, 3, 3, 5000),
+(23, 11, 8, 2, 1100),
+(24, 11, 4, 1, 1200),
+(25, 11, 3, 3, 5000),
+(26, 12, 6, 1, 1500),
+(27, 12, 7, 1, 2000),
+(28, 12, 3, 1, 5000),
+(29, 13, 7, 1, 2000),
+(30, 13, 6, 1, 1500),
+(31, 14, 7, 1, 2000),
+(32, 14, 6, 1, 1500);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -85,8 +170,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `category_id`, `brand_id`, `short_description`, `price`, `quantity`, `point_of_restock`, `image`, `active`) VALUES
-(1, 'Red Sharee', 2, 3, 'asd', 1200, 10, 2, NULL, 1),
-(2, 'Lali', 2, 1, NULL, 78678, 78, 0, 'uploads/20260615-090735.jpg', 1);
+(1, 'Red Sharee', 2, 3, 'asd', 1200, 10, 2, NULL, 0),
+(2, 'Lali', 2, 1, NULL, 78678, 78, 0, 'uploads/20260615-090735.jpg', 0),
+(3, 'Silk Sharee', 2, 1, NULL, 5000, 8, 2, 'uploads/20260616-053502.jpg', 1),
+(4, 'Blue Sharee', 2, 3, NULL, 1200, 20, 5, 'uploads/20260616-055245.jpg', 1),
+(5, 'Blue Shirt', 1, 2, NULL, 1300, 15, 5, 'uploads/20260616-055319.jpg', 1),
+(6, 'Black Shirt', 1, 3, NULL, 1500, 12, 5, 'uploads/20260616-055400.jpg', 1),
+(7, 'Red Dress', 3, 1, NULL, 2000, 8, 4, 'uploads/20260616-055432.jpg', 1),
+(8, 'Pink Dress', 3, 2, NULL, 1100, 4, 5, 'uploads/20260616-055500.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -149,6 +240,18 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -183,10 +286,22 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `roles`
