@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="password" name="input" data-price="1000">
+    <button>Show/Hide</button>
+    
+    <script src="js/jquery-4.0.0.min.js"></script>
+    <script>
+        $("button").click(function(){
+            let input = $("input");
+            let inputType = input.attr("type");
+            // console.log(inputType);
+            if(inputType == "password"){
+                input.attr("type", "text");
+            }else{
+                input.attr("type", "password");
+            }
+        });
+
+
+        // $("input").attr("name", "username");
+        // let inputAttr = $("input").attr("value");
+        // console.log(inputAttr);
+        // $("input").attr({
+        //     name  : "username",
+        //     title : "Enter your name",
+        //     value : "Hello TCLK",
+        //     "data-price" : "2000"
+        // });
+        // $("input").data("price", "2000");
+        // console.log($("input").data("price"));
+    </script>
+</body>
+</html>
