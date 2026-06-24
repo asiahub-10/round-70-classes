@@ -1,10 +1,12 @@
 <?php
 require_once 'models/product.class.php';
 require_once 'models/order.class.php';
+require_once 'models/category.class.php';
 
+$categories = Category::readAll();
 $rows = Product::readAll();
 // echo '<pre>';
-// print_r($rows);
+// print_r($categories);
 // echo '</pre>';
 
 if (isset($_POST['checkout'])) {
@@ -59,6 +61,14 @@ if (isset($_POST['checkout'])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-8">
+                    <div>
+                        <select class="form-control mb-3" id="categoryFilter" style="width: 200px">
+                            <option value="0">All</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?= $category['id']; ?>"><?= $category['name']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
                     <div class="row">
                         <?php
                         foreach ($rows as $item):
@@ -151,6 +161,25 @@ if (isset($_POST['checkout'])) {
         </tr>
     </table>
 </div>
+
+<script src="<?= BASE_URL_ADMIN; ?>assets/js/jquery-4.0.0.min.js"></script>
+<script>
+    $("#categoryFilter").on("change", function() {
+        // console.log($(this).val());
+        let categoryId = $(this).val();
+        $.ajax({
+            // url: "api/get-products?id=" + categoryId,
+            url: `api/get-products`,
+            type: "get",
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
 
 <script src="<?= BASE_URL_ADMIN; ?>helpers/cart-helper.js"></script>
 <script>
