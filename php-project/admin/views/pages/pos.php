@@ -69,12 +69,12 @@ if (isset($_POST['checkout'])) {
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="row">
+                    <div class="row" id="productList">
                         <?php
                         foreach ($rows as $item):
-                            if ($item['active'] == 0) {
-                                continue;
-                            }
+                            // if ($item['active'] == 0) {
+                            //     continue;
+                            // }
                         ?>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="card" style="cursor: pointer"
@@ -167,12 +167,31 @@ if (isset($_POST['checkout'])) {
     $("#categoryFilter").on("change", function() {
         // console.log($(this).val());
         let categoryId = $(this).val();
+        // console.log(categoryId);
         $.ajax({
             // url: "api/get-products?id=" + categoryId,
-            url: `api/get-products`,
+            url: `api/get-products?category_id=${categoryId}`,
             type: "get",
             success: function(response) {
-                console.log(response);
+                let products = JSON.parse(response);
+                // console.log(products);
+                let html = "";
+                products.forEach(item => {
+                    html += `
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card" style="cursor: pointer"
+                            onclick="addToCart(${item['id']},'${item['name']}',${item['price']})">
+                            <img src="<?= BASE_URL_ADMIN; ?>${item['image']}" alt="" height="200" class="card-img p-3">
+                            <div class="card-body text-center">
+                                <h6>${item['name']}</h6>
+                                <h5 class="card-text">BDT ${item['price']}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                });
+                // console.log(html);
+                $("#productList").html(html);
             },
             error: function(error) {
                 console.log(error);
