@@ -16,17 +16,19 @@
         // document.querySelectorAll('p').forEach(p => {
         //     p.style.color = 'red';
         // });
-        // $(".p-3").css("color", "red");
         // // document.querySelector("div").innerText = "Hello World";
-        // $("div").html('Hello <b>World</b>');
-        // $("div").text("Hello <b>World</b>");
+        $("div").html('Hello <b>World</b>');
+        $("div").text("Hello <b>World</b>");
+        
+        // document.querySelector('p').style.backgroundColor = "yellow";
+        $("p:first-child").css("color", "red");
 
-        // $(".p-1").css({
-        //     "color"             : "red",
-        //     "font-weight"       : "bold",
-        //     "font-size"         : "20px",
-        //     "background-color"  : "yellow"
-        // });
+        $(".p-1").css({
+            "color"             : "red",
+            "font-weight"       : "bold",
+            "font-size"         : "20px",
+            "background-color"  : "yellow"
+        });
         // $("div").append("<p>Para 4</p>");
         // $("div").append("<p>Para 5</p>");
         // $("div").append("<p>Para 6</p>");
@@ -37,7 +39,7 @@
         // document.querySelector(".p-3").addEventListener("click", function(){
         //     alert();
         // });
-        $(".p-3").click(function(){
+        $(".p").click(function(){
             alert();
         });
         $("#p2").mouseover(function(){
@@ -45,6 +47,9 @@
         });
         $("[class='p-1']").dblclick(function(){
             alert();
+        });
+        $(".p").on("click",()=>{
+            console.log("ok");
         });
     </script>
 </body>

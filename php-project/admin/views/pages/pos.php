@@ -166,6 +166,7 @@ if (isset($_POST['checkout'])) {
 <script>
     $("#categoryFilter").on("change", function() {
         // console.log($(this).val());
+        // let categoryId = $("#categoryFilter").val();
         let categoryId = $(this).val();
         // console.log(categoryId);
         $.ajax({

@@ -1,21 +1,26 @@
 <?php
 require_once 'models/user.class.php';
 
-if(isset($_POST['delete_id'])){
+if (isset($_POST['delete_id'])) {
   $id = $_POST['delete_id'];
   // echo $id;
   $res = User::delete($id);
-  if($res === true){
+  if ($res === true) {
     $msg = "User deleted successfully";
-  }else{
+  } else {
     $msg = $res;
   }
 }
+$limit = 3;
+$pages = User::getPageNo($limit);
+// print_r($pages);
+$rows = User::readAll(1, $limit);
+if(isset($_GET['pg'])) {
+  $pg = $_GET['pg'];
+  // echo "<h1>Page Number: $pg</h1>";
+  $rows = User::readAll($pg, $limit);
+}
 
-$rows = User::readAll();
-// echo '<pre>';
-// print_r($rows);
-// echo '</pre>';
 ?>
 
 <div class="content-wrapper">
@@ -41,11 +46,11 @@ $rows = User::readAll();
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <?php if(isset($msg)): ?>
-          <div class="alert alert-dark alert-dismissible fade show" role="alert">
-            <?php echo $msg ?? "" ?>
-            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">&times;</button>
-          </div>
+          <?php if (isset($msg)): ?>
+            <div class="alert alert-dark alert-dismissible fade show" role="alert">
+              <?php echo $msg ?? "" ?>
+              <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">&times;</button>
+            </div>
           <?php endif; ?>
           <div class="card">
             <div class="card-header">
@@ -86,6 +91,17 @@ $rows = User::readAll();
               </div>
             </div>
             <!-- /.card-body -->
+            <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="users?pg=1">« First</a></li>
+                <li class="page-item"><a class="page-link" href="users?pg=1">&lt; Prev</a></li>
+                <?php for($i = 1; $i <= $pages; $i++): ?>
+                <li class="page-item"><a class="page-link" href="users?pg=<?= $i; ?>"><?= $i; ?></a></li>
+                <?php endfor; ?>
+                <li class="page-item"><a class="page-link" href="users?pg=<?= $pages; ?>">Next &gt;</a></li>
+                <li class="page-item"><a class="page-link" href="users?pg=<?= $pages; ?>">Last »</a></li>
+              </ul>
+            </div>
           </div>
           <!-- /.card -->
         </div>
