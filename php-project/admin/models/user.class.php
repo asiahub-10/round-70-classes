@@ -14,7 +14,6 @@ class User
         $this->role_id = $_role_id;
         $this->password = $_password;
     }
-
     public function create() {
       global $db;
       $sql = "INSERT INTO users (name, email, role_id, password) 

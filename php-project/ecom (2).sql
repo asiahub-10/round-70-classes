@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 24, 2026 at 06:32 AM
+-- Generation Time: Jun 28, 2026 at 09:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -229,10 +229,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `role_id`, `password`) VALUES
-(8, 'Asia', 'asia@mail.com', 1, '$2y$10$2JCgezDs5VNi8i8obE82ououKxqisY4FPjHJjFKGKdl0j4UJDQ6ny'),
+(8, 'Asia', 'asia@mail.com', 1, '$2y$10$FuJFW8c6LX6PoucVFHOeGOnTMgepOU0qu2.s3dYiG2Eikrfq98Xti'),
 (9, 'Lali', 'lali@mail.com', 2, '$2y$10$/5Q3TnCcGlcpaexB.g5dK.Ao3CIIfGsUVWfsO.9CxJ.k4a.sPOfPO'),
 (10, 'Mina', 'm@mail.com', 2, '$2y$10$UZBh6UEUJ0PYtbdQ7rRPdu7S9Ngnxq2MgkM76tDSFrKzNvyGJ.Ws2'),
-(11, 'Keya', 'k@mail.com', 3, '$2y$10$cWOiXarBHVF4uXFzTYeHte8FS.qkVj12Y8duN03zUFeVljydn0Zs6');
+(11, 'Keya', 'k@mail.com', 3, '$2y$10$cWOiXarBHVF4uXFzTYeHte8FS.qkVj12Y8duN03zUFeVljydn0Zs6'),
+(12, 'Ali', 'ali@example.com', 1, '$2y$10$wADaTpiUoiHQNVIRRnK4yuaVDPh.1R6aCg4FE9Rb/mZxEWtyx2xsS'),
+(14, 'Arif', 'a@example.com', 2, '$2y$10$EQb/aJm1Sg9O/D6tFBIZfu8kKCz8nt27LcFs9Ga1UFJcOHovPWhmm'),
+(15, 'Keya', 'k@example.com', 3, '$2y$10$FeAmntBmL6K0Njl.YeNke.l9Y/eXTU//4FTRg9nDe6jlxsc88/LqC'),
+(16, 'Asia', 'admin@mail.com', 1, '$2y$10$JPPr9RD8pJDcCwvI/3IlSODEB0kgq2Gi0bo1JsK3NbL0PQtuH4uea');
 
 --
 -- Indexes for dumped tables
@@ -324,7 +328,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
