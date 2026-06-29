@@ -1,7 +1,6 @@
 <?php
 if(isset($_GET['page'])){
     $page = $_GET['page'];
-
     if(isset($_SESSION['id']) == false){
         include_once('views/pages/auth/login.php');
     }elseif($page == 'dashboard'){
@@ -37,5 +36,7 @@ if(isset($_GET['page'])){
     else{
         include_once('views/pages/dashboard.php');
     }
+}else{
+    include_once('views/pages/auth/login.php');
 }
 ?>
