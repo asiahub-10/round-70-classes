@@ -33,6 +33,9 @@ if(isset($_GET['page'])){
     elseif($page == 'blog'){
         include_once('views/pages/blog.php');
     }
+    elseif($page == 'access-deny'){
+        include_once('views/pages/access-deny.php');
+    }
     else{
         include_once('views/pages/dashboard.php');
     }
